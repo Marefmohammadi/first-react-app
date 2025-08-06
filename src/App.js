@@ -1,41 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
 import { render } from '@testing-library/react';
-import Main from './components/Main';
-import Sidbar from './components/Sidbar';
-import Header from './components/Header';
-import Promo from './components/Promo'; // Assuming you have a prompt component
-import Photo from './Photo.jpg'; // Assuming you have a photo component
+import Promo from './components/Promo'; 
+import Photo from './Photo.jpg'; 
+import Btn from './Btn';
 
-const bool = false; // Example boolean variable
-function Example(props) {
-  const userPic = <img src={Photo} alt="User" style={{ width: "100px", height: "100px", borderRadius: "50%" }} />;
-  return userPic;
-};
 
-function Card(props) {
-  return (
-    <div className="card">
-        <div>
-          <h2>{props.h2}</h2>
-          <h3>{props.h3}</h3>
-        </div>
-      </div>
-  );
-};
 function App(props) {
+  function thirdExample() {
+    console.log("Third Example");
+  };
+
+  const fourthExample = () => {
+    console.log("Fourth Example");
+    console.log("This is a second console log in the fourth example");
+  };
   return (
-    <div>
-      <Header />
-      <Main />
-      <Sidbar />
-      <Example  />
-      <h1>Task: Add three Card elements</h1>
-      <Card h2="First card's h2" h3="First card's h3" />
-      <Card h2="Second card's h2" h3="Second card's h3" />
-      <Card h2="Third card's h2" h3="Third card's h3" />
+    <div className="App">
+      <Btn /><br></br>
+      <button onClick={function() {console.log("First Example")}}>
+        An inline anonymous ES5 funcation event handler 
+      </button><br></br>
+      <button onClick={() => console.log("Second Example")}>
+        An inline anonymous ES6 arrow function event handler
+      </button><br></br>
+      <button onClick={thirdExample}>
+        Using a separate function declration.
+      </button><br></br>
+      <button onClick={fourthExample}>
+        Using a separate function expression.
+      </button><br></br>
+
     </div>
-    
   );
   
 };
