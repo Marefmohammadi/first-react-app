@@ -4,65 +4,39 @@ import { render } from '@testing-library/react';
 import Homepage from './Homepage';
 import AboutMe from './AboutMe';
 import Contact from './Contact';
+import Calculator from './component/Calculator';
 import {Routes, Route, Link, input, button} from 'react-router-dom';
 import React, { use, useRef, useState } from 'react';
 import LogInOutButton from './component/LogInOutButton';
-
-
-function CurrentImage(){
-  const time = new Date().getHours();
-  const isDaytime = time >=6 && time <=16;
-
-  return (
-    <div>
-      {isDaytime
-      ? "Hello Day time" : "Hello Night time"}
-    </div>
-  );
-}
-
-function CurrentMessage({day}){
-  const weekday = (day >=1 && day <= 5);
-  const weekend = (day >=6 && day <= 7);
-  let message;
-
-  if(weekday){
-    message = "Workdays";
-  } else if(weekend){
-    message = "Rest Day";
-  } else{
-    message = <h1 style={{color: "red"}}>Error</h1>
-  }
-
-  return(
-    <div>
-      {message}
-    </div>
-  );
-  
-}
+import ReactPlayer from  "react-player";
 
 
 
 
 function App() {
-  const time = new Date();
-  const day = time.toLocaleDateString("en-us", {weekday: "long"});
-  const morning = time.getHours() >= 6 && time.getHours <= 12;
-  let dayMessage;
-  if(day.toLocaleLowerCase() === "monday"){
-    dayMessage = `Happy ${day}`;
-  } else if(day.toLowerCase() === "tuesday"){
-    dayMessage = `${day}, four days to go`;
-  }else if(day.toLowerCase() === "wednesday"){
-    dayMessage = `${day}, half way there`;
-  }else if(day.toLowerCase() === "thursday"){
-    dayMessage = `${day}, start planing the weeked`;
-  }else if(day.toLowerCase() === "friday"){
-    dayMessage = 'Woo, hooo, the weekend is coming';
-  } else{
-    dayMessage = "Stay calm and keep having fun";
-  }
+  
+  const bird1 = new Audio(
+    "https://upload.wikimedia.org/wikipedia/commons/9/9b/Hydroprogne_caspia_-_Caspian_Tern_XC432679.mp3"
+  );
+  const bird2 = new Audio(
+    "https://upload.wikimedia.org/wikipedia/commons/b/b5/Hydroprogne_caspia_-_Caspian_Tern_XC432881.mp3" 
+  );
+
+  function toggle1(){
+    if(bird1.paused){
+      bird1.play();
+    }else{
+      bird1.pause();
+    }
+  };
+
+  function toggle2(){
+    if(bird2.paused){
+      bird2.play();
+    }else{
+      bird2.pause();
+    }
+  };
  
   return (
     <div className="App">
@@ -79,13 +53,15 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
       </Routes>
 
-      <CurrentImage/>
-      <CurrentMessage day={9} />
-      <LogInOutButton isLoggedIn={false}/>
-      <h1>
-        {dayMessage}
-      </h1>
-      {morning ? <h2>Have you had breakfast yet?</h2> : ""}
+      <LogInOutButton isLoggedIn={true}/>
+      
+
+      <button onClick={toggle1}>Caspian Tern 1</button>
+      <button onClick={toggle2}>Caspian Tern 2</button><br></br><br></br>
+
+      <Calculator/>
+
+     
       <footer className="footer">
         <p>© 2023 My Website</p>
       </footer>
